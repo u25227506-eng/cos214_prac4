@@ -1,12 +1,15 @@
 #ifndef PREPRODUCTIONPHASE_H
 #define PREPRODUCTIONPHASE_H
 
-#include "PhaseComposite.h"
 
-class PreProductionPhase : public PhaseComposite{
+#include "PhaseComposite.h"
+#include "Iterator.h"
+
+class PreProductionPhase : public PhaseComposite {
     public: 
         PreProductionPhase(const std::string& name);
         ~PreProductionPhase();
+        Iterator* createIterator();
 };
 
-#endif //PREPRODUCTIONPHASE_H
+#endif //POSTPRODUCTIONPHASE_H

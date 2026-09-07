@@ -1,21 +1,29 @@
-#ifndef TASKDECORATOR_H
-#define TASKDECORATOR_H
+#pragma once
 
 #include "FilmProductionComp.h"
+#include "TaskState.h"
 
-class TaskDecorator : public FilmProductionComp{
-    protected:
-        FilmProductionComp* wrapped;
-    public:     
-        TaskDecorator(FilmProductionComp* comp);
-        virtual ~TaskDecorator();
+class TaskDecorator : public FilmProductionComp {
+protected:
+    FilmProductionComp* Comp;
+    TaskState* taskState;
 
-        std::string getName() const override;
-        void start() override;
-        void finish() override;
-        void delay() override;
-        std::string getStateName() const override;
+    double extraBudget;
+    double extraTime;
 
+public:
+    TaskDecorator(FilmProductionComp* comp, double budget, double time);
+    virtual ~TaskDecorator();
+
+    TaskState* getState();
+    void setState(TaskState* taskState);
+
+    void add(FilmProductionComp* comp) override;
+    void remove(FilmProductionComp* comp) override;
+    FilmProductionComp* getChild(int index) override;
+    std::string getStateName() const override;
+
+    double getBudget() const override;
+    double getTime() const override;
 };
 
-#endif //TASKDECORATOR_H

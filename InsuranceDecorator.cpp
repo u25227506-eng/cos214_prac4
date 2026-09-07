@@ -1,13 +1,16 @@
 #include "InsuranceDecorator.h"
 
-InsuranceDecorator::InsuranceDecorator(FilmProductionComp* comp, double insuranceCost) : TaskDecorator(comp), insuranceCost(insuranceCost){}
+InsuranceDecorator::InsuranceDecorator(FilmProductionComp* comp, double insuranceCost)
+    : TaskDecorator(comp, 0.0, 0.0), insuranceCost(insuranceCost) {
+}
 
-InsuranceDecorator::~InsuranceDecorator(){}
+InsuranceDecorator::~InsuranceDecorator() {
+}
 
 double InsuranceDecorator::getBudget() const {
-    return wrapped->getBudget() + insuranceCost;
+    return TaskDecorator::getBudget() + insuranceCost;
 }
 
 double InsuranceDecorator::getTime() const {
-    return wrapped->getTime();
+    return TaskDecorator::getTime();
 }
